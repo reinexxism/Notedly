@@ -4,17 +4,49 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 4000;
 
+// 임시 기본 인메모리 데이터
+let notes = [
+  { id: '1', content: 'This is a first note', author: 'Joohyn Choi' },
+  { id: '2', content: 'This is a second note', author: 'Kyeongeun Jo' },
+  { id: '3', content: 'This is a third note', author: 'Inyoung Jang' }
+];
+
 // graphQL 스키마 언어로 스키마를 구성
 const typeDefs = gql`
+  type Note {
+    id: ID!
+    content: String!
+    author: String!
+  }
+
   type Query {
-    hello: String
+    notes: [Note!]
+    note(id: ID!): Note!
+  }
+
+  type Mutation {
+    newNote(content: String!, author: String!): Note!
   }
 `;
 
 // 스키마 필드를 위한 리졸버 함수 제공
 const resolvers = {
   Query: {
-    hello: () => 'Hello, World!'
+    notes: () => notes,
+    note: (parent, args) => {
+      return notes.find(note => note.id == args.id);
+    }
+  },
+  Mutation: {
+    newNote: (parent, args) => {
+      let noteValue = {
+        id: String(notes.length + 1),
+        content: args.content,
+        author: args.author
+      };
+      notes.push(noteValue);
+      return noteValue;
+    }
   }
 };
 
