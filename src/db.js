@@ -13,7 +13,7 @@ module.exports = {
     // DB에 연결
     mongoose.connect(DB_HOST);
     // 연결에 실패하면 에러 로깅
-    mongoose.connections.on('error', err => {
+    mongoose.connection.on('error', err => {
       console.log(err);
       console.log(
         'MongoDB connections error. Please make sure MongoDB is running.'

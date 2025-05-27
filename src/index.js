@@ -1,8 +1,14 @@
 const { ApolloServer, gql } = require('apollo-server-express');
 const express = require('express');
 
+require('dotenv').config();
+const db = require('./db');
+
 const app = express();
 const port = process.env.PORT || 4000;
+const DB_HOST = process.env.DB_HOST;
+
+db.connect(DB_HOST);
 
 // 임시 기본 인메모리 데이터
 let notes = [
