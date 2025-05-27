@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 
+// mongodb connection
 db.connect(DB_HOST);
 
 // 임시 기본 인메모리 데이터
