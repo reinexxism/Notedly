@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports = {
+  // 굳이 사용하지 않아도 되는 코드 -> 16v 이상이면 가능
   connect: DB_HOST => {
     // 몽고 드라이버의 업데이트된 URL String Parser 사용
     mongoose.set('useNewUrlParser', true);
