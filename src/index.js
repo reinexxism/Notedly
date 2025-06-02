@@ -1,5 +1,6 @@
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+const typeDefs = require('./schema');
 
 require('dotenv').config();
 const db = require('./db');
@@ -17,24 +18,6 @@ let notes = [
   { id: '2', content: 'This is a second note', author: 'Kyeongeun Jo' },
   { id: '3', content: 'This is a third note', author: 'Inyoung Jang' }
 ];
-
-// graphQL 스키마 언어로 스키마를 구성
-const typeDefs = gql`
-  type Note {
-    id: ID!
-    content: String!
-    author: String!
-  }
-
-  type Query {
-    notes: [Note!]
-    note(id: ID!): Note!
-  }
-
-  type Mutation {
-    newNote(content: String!, author: String!): Note!
-  }
-`;
 
 // 스키마 필드를 위한 리졸버 함수 제공
 const resolvers = {
