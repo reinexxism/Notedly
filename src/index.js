@@ -63,8 +63,6 @@ const server = new ApolloServer({ typeDefs, resolvers });
 // 아폴로 그래프QL 미들웨어를 적용하고 경로를 /api로 설정
 server.applyMiddleware({ app, path: '/api' });
 
-// app.get('/', (req, res) => res.send('Hello, Joohyun'));
-
 app.listen({ port }, () =>
   console.log(
     `GraphQL server running at http://localhost:${port}${server.graphqlPath}`
